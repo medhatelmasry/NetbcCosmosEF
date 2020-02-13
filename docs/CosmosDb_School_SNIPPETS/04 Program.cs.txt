@@ -1,0 +1,33 @@
+static void InsertSimpleCourse() {
+  var course = new Course {
+    Id = Guid.NewGuid(),
+    Number = "COMP1234",
+    Description = "ASP.NET Essentials",
+    Room = new Room {
+      Building = "SE6",
+      RoomNumber = 127
+    }
+  };
+  using (var context = new SchoolContext()) {
+    context.Database.EnsureCreated();
+    context.Add(course);
+    context.SaveChanges();
+  }
+}
+
+static void dispCourses() {
+  using (var context = new SchoolContext()) {
+    var courses = context.Courses.ToList();
+    foreach (var course in courses) {
+      displayCourseInfo(course);
+      Console.WriteLine("===========================================");
+    }
+  }
+}
+
+static void displayCourseInfo(Course course) {
+  Console.WriteLine($"{course.Description}");
+  Console.WriteLine($"   ID: {course.Id}");
+  Console.WriteLine($"   NUMBER: {course.Number}");
+  Console.WriteLine($"   ROOM: {course.Room.Building}, {course.Room.RoomNumber}");
+} 

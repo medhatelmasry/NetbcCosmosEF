@@ -1,0 +1,8 @@
+if (course.Students == null || course.Students.Count == 0) {
+    Console.WriteLine("   NO STUDENTS");
+} else {
+  Console.WriteLine($"   Students: {course.Students.Count()}");
+  course.Students.ForEach(x => {
+    Console.WriteLine($"       ID: {x.StudentId} Name: {x.FirstName} {x.LastName}, {x.Gender}");
+  });
+}

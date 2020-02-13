@@ -1,0 +1,1 @@
+modelBuilder.Entity<Course>().HasOne(j => j.AssignedInstructor);

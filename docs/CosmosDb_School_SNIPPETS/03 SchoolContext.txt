@@ -1,0 +1,14 @@
+public class SchoolContext : DbContext {
+  public DbSet<Course> Courses { get; set; }
+  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+    optionsBuilder.UseCosmos(
+      "*YOUR-COSMOSDB-ENPOINT*",
+      "*YOUR-KEY*",
+      "EFCoreTest"
+    );
+  }
+  
+  protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    modelBuilder.Entity<Course>().OwnsOne(j => j.Room);
+  }
+}

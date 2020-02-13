@@ -1,0 +1,11 @@
+static void deleteOneCourse(string id) {
+    Guid g = new Guid(id);
+    using (var context = new SchoolContext()) {
+      var course = context.Courses.Find(g);
+      if (course != null) {
+        context.Courses.Remove(course);
+        context.SaveChanges();
+        Console.WriteLine($"Course with ID={id} has been DELETED");
+      }
+    }
+}

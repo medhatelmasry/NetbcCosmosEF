@@ -1,0 +1,1 @@
+public DbSet<Instructor> Instructors { get; set; }

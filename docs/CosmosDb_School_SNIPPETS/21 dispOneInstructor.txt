@@ -1,0 +1,16 @@
+static void dispOneInstructor(string id) {
+  Guid g = new Guid(id);
+  using (var context = new SchoolContext()) {
+    var instructor = context.Instructors.Find(g);
+    if (instructor != null) {
+      Console.WriteLine($"Instructor ID: {instructor.Id}");
+      Console.WriteLine("===========================================");
+      // Load all courses with the same assigned instructor id
+      var jobs = context.Courses.Where(x => x.AssignedInstructorId == g).ToList();
+      foreach (var job in jobs) {
+        displayCourseInfo(job);
+        Console.WriteLine("===========================================");
+      }
+    }
+  }
+}

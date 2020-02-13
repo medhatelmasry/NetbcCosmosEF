@@ -1,0 +1,4 @@
+using (var context = new SchoolContext()) {
+  var instructor = context.Instructors.First(x => x.Id == course.AssignedInstructorId);
+  Console.WriteLine($"Assigned Instructor: {instructor?.FirstName} {instructor?.LastName}");
+}

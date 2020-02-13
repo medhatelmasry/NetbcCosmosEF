@@ -1,0 +1,33 @@
+static Guid InsertCourseWithStudents() {
+  var course = new Course {
+    Id = Guid.NewGuid(),
+    Number = "COMP3717",
+    Description = "Android Development",
+    Room = new Room {
+      Building = "SE12",
+      RoomNumber = 322
+    },
+    Students = new List<Student>() {
+      new Student {
+        StudentId = "A00111111",
+        FirstName = "Bob",
+        LastName = "Fox",
+        Gender = "Male"
+      },
+      new Student {
+        StudentId = "A00222222",
+        FirstName = "Ann",
+        LastName = "Fay",
+        Gender = "Female"
+      }
+    }
+  };
+
+  using (var context = new SchoolContext()) {
+    context.Database.EnsureCreated();
+    context.Add(course);
+    context.SaveChanges();
+  }
+
+  return course.Id;
+}

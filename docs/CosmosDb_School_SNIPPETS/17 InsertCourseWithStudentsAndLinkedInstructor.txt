@@ -1,0 +1,40 @@
+static Guid InsertCourseWithStudentsAndLinkedInstructor() {
+  var course = new Course {
+    Id = Guid.NewGuid(),
+    Number = "COMP2914",
+    Description = "Database Design",
+    Room = new Room {
+      Building = "SE12",
+      RoomNumber = 308
+    },
+    Students = new List<Student>() {
+      new Student {
+        StudentId = "A00333333",
+        FirstName = "Tom",
+        LastName = "Dow",
+        Gender = "Male"
+      },
+      new Student {
+        StudentId = "A00444444",
+        FirstName = "Sue",
+        LastName = "Lee",
+        Gender = "Female"
+      }
+    },
+    AssignedInstructor = new Instructor {
+      Id = Guid.NewGuid(),
+      Title = "Mr",
+      FirstName = "Tim",
+      LastName = "Coe"
+    }
+  };
+
+
+  using (var context = new SchoolContext()) {
+    context.Database.EnsureCreated();
+    context.Add(course);
+    context.SaveChanges();
+  }
+
+  return course.Id;
+}

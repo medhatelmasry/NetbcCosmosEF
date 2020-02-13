@@ -1,0 +1,12 @@
+static void updateOneCourse(string id) {
+  Guid g = new Guid(id);
+  using (var context = new SchoolContext()) {
+    var course = context.Courses.Find(g);
+    if (course != null) {
+      course.Room.Building = "NE1";
+      course.Room.RoomNumber = 123;
+      context.SaveChanges();
+      Console.WriteLine($"Course with ID={id} has been UPDATED");
+    }
+  }
+}

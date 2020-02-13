@@ -1,0 +1,40 @@
+static Guid InsertInstructorWithLinkedCourses()  {
+  var instructorId = Guid.NewGuid();
+  var instructor = new Instructor  {
+    Id = instructorId,
+    Title = "Mr",
+    FirstName = "Joe",
+    LastName = "Doe"
+  };
+
+  var course1 = new Course {
+    Id = Guid.NewGuid(),
+    Number = "COMP3974",
+    Description = "Data Communications",
+    Room = new Room {
+      Building = "SE12",
+      RoomNumber = 320
+    },
+    AssignedInstructor = instructor
+  };
+
+  var course2 = new Course {
+    Id = Guid.NewGuid(),
+    Number = "COMP2954",
+    Description = "HTML",
+    Room = new Room {
+      Building = "SE12",
+      RoomNumber = 319
+    },
+    AssignedInstructor = instructor
+  };
+
+  using (var context = new SchoolContext()) {
+    context.Database.EnsureCreated();
+    context.Add(course1);
+    context.Add(course2);
+    context.SaveChanges();
+  }
+
+  return instructorId;
+} 

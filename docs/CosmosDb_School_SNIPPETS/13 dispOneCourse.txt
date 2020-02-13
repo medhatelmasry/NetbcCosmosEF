@@ -1,0 +1,10 @@
+static void dispOneCourse(string id) {
+  Guid g = new Guid(id);
+  using (var context = new SchoolContext()) {
+    var course = context.Courses.Find(g);
+    if (course != null) {
+      displayCourseInfo(course);
+      Console.WriteLine("===========================================");
+    }
+  }
+}
